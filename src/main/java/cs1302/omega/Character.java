@@ -7,8 +7,11 @@ package cs1302.omega;
 public class Character {
 
     int row;
+    //row position of character
     int column;
+    //column position of character
     char view;
+    //assigns a char to represent each object
 
     /**
      * Constructor for Character object. Takes in location and view values.
@@ -20,7 +23,7 @@ public class Character {
         this.row = row;
         this.column = column;
         this.view = view;
-    }
+    } //Character constructor
 
     /**
      * Getter method for {@code row}.
@@ -28,7 +31,7 @@ public class Character {
      */
     public int getRow() {
         return row;
-    }
+    } //getRow
 
     /**
      * Setter method for {@code row}.
@@ -36,7 +39,7 @@ public class Character {
      */
     public void setRow(int row) {
         this.row = row;
-    }
+    } //setRow
 
     /**
      * Getter method for {@code column}.
@@ -44,7 +47,7 @@ public class Character {
      */
     public int getColumn() {
         return column;
-    }
+    } //getColumn
 
     /**
      * Setter method for {@code column}.
@@ -52,7 +55,7 @@ public class Character {
      */
     public void setColumn(int column) {
         this.column = column;
-    }
+    } //setColumn
 
     /**
      * Getter method for {@code view}.
@@ -60,7 +63,7 @@ public class Character {
      */
     public char getView() {
         return view;
-    }
+    } //getView
 
     /**
      * Setter method for {@code view}.
@@ -68,7 +71,7 @@ public class Character {
      */
     public void setView(char view) {
         this.view = view;
-    }
+    } //setView
 
     /**
      * Setter method for {@code row} and {@code column}.
@@ -78,6 +81,6 @@ public class Character {
     public void setPosition(int row, int column) {
         this.row = row;
         this.column = column;
-    }
+    } //setPosition
 
 } //Character

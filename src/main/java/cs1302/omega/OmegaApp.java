@@ -29,8 +29,6 @@ import javafx.geometry.Pos;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.Event;
-import javafx.geometry.Bounds;
-import javafx.geometry.BoundingBox;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -53,13 +51,13 @@ public class OmegaApp extends Application {
     GameBoard board;//PacMan board
     private String outputBoard;
     private static final Color COLOR_GAME_OVER = Color.web("#0000FF", 0.63);
-    private static Tile[][] tiles;
+    private static Tile[][] tiles; //2D array
     private int rowcount; //rows in the grid
     private int colcount; //columns in the grid
 
     char tileView;
     Text score = new Text();//text to be updated with score
-    Text cherryTurnsLeft = new Text();// text to be updated with number of turns left
+    Text cherryRoundsLeft = new Text();// text to be updated with number of turns left
 
     GridPane gridPane = new GridPane();//stores tiles array
     GridPane end = new GridPane();//gameOver screen
@@ -107,24 +105,28 @@ public class OmegaApp extends Application {
         title.setFill(Color.BLUE);
         GridPane.setMargin(title, new Insets(0, 0, 0, 0));
         gridPane.add(title, 3, 0, 4, 1);
+        //formatting for center text Pac-Man
 
         score.setText("Score: " + board.getScore());
         score.setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
         score.setFill(Color.WHITE);
         GridPane.setMargin(score, new Insets(0, 0, 0, 0));
         gridPane.add(score, 0, 0, 2, 1);
+        //formatting for score
 
-        cherryTurnsLeft.setText("Cherry Turns Left: " + board.getCherryTurns());
-        cherryTurnsLeft.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
-        cherryTurnsLeft.setFill(Color.RED);
-        GridPane.setMargin(cherryTurnsLeft, new Insets(0, 0, 0, 0));
-        gridPane.add(cherryTurnsLeft,7,0,4,1);
+        cherryRoundsLeft.setText("Cherry Power: " + board.getCherryRounds());
+        cherryRoundsLeft.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
+        cherryRoundsLeft.setFill(Color.RED);
+        GridPane.setMargin(cherryRoundsLeft, new Insets(0, 0, 0, 0));
+        gridPane.add(cherryRoundsLeft,7,0,4,1);
+        //formatting for cherry rounds
 
         for (int i = 0;i < board.boardSize; i++) {
             colcount = 0;
             for (int j = 0; j < board.boardSize; j++) {
                 tiles[i][j] = new Tile(board.getGrid()[i][j]);
                 gridPane.add(tiles[i][j].getImage(), j, i + 1);
+                //loops through array and adds images
                 colcount++;
             }
             rowcount++;
@@ -181,7 +183,7 @@ public class OmegaApp extends Application {
                 }
                 rowcount++; //increment row count
             }
-            cherryTurnsLeft.setText("Cherry Turns Left: " + board.getCherryTurns());
+            cherryRoundsLeft.setText("Cherry Power: " + board.getCherryRounds());
             score.setText("Score: " + board.getScore());
             //updates score and cherry count
             gameOver();
@@ -192,7 +194,7 @@ public class OmegaApp extends Application {
          */
         public void gameOver() {
             if (board.isGameOver()) {
-                playAgain();
+                playAgain(); //method resets variables
                 Text endtext = new Text();
                 endtext.setText("GAME OVER");
                 DropShadow ds = new DropShadow();
@@ -213,6 +215,7 @@ public class OmegaApp extends Application {
                 screen.setOpacity(.72);
                 screen.setFill(COLOR_GAME_OVER);
                 stackPane.getChildren().addAll(screen,end);
+                //adds a game over screen to stackPane
                 play();
             }
         }
@@ -228,7 +231,7 @@ public class OmegaApp extends Application {
         Text message = new Text("Game Over! To play again, select 'New Game' and close window.");
         playPane.getChildren().add(message);
 
-        Button buttonYes = new Button("NewGame");
+        Button buttonYes = new Button("New Game");
         buttonYes.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent arg0) {
@@ -244,6 +247,7 @@ public class OmegaApp extends Application {
         playPane.getChildren().addAll(buttonYes, buttonNo);
         Scene playScene = new Scene(playPane);
         stage.setScene(playScene);
+        //creates a new modal window for user options
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Continue Game? ");
         stage.sizeToScene();
@@ -272,33 +276,33 @@ public class OmegaApp extends Application {
                 image = new ImageView((new Image("file:resources/smallDot",40,40,true,true)));
             } else if (tileView == 'P') { //user
                 image = new ImageView((new Image("file:resources/pacman",40,40,true,true)));
-            } else if (tileView == 'G' && board.getCherryTurns() == 0) {
+            } else if (tileView == 'G' && board.getCherryRounds() == 0) {
                 if (board.getGhosts()[0] != null && board.getGhosts()[0].getRow() == rowcount &&
                     board.getGhosts()[0].getColumn() == colcount) {
                     image = new ImageView(
-                        (new Image("file:resources/blinkyLeft",30,30,true,true)));
+                        (new Image("file:resources/blinkyLeft",30,30,true,true))); //ghost
                 } else if (board.getGhosts()[1] != null && board.getGhosts()[1].getRow() == rowcount
                            && board.getGhosts()[1].getColumn() == colcount) {
                     image = new ImageView(
-                        (new Image("file:resources/inkyUp",30,30,true,true)));
+                        (new Image("file:resources/inkyUp",30,30,true,true))); //ghost
                 } else if (board.getGhosts()[2] != null
                            && board.getGhosts()[2].getRow() == rowcount
                            && board.getGhosts()[2].getColumn() == colcount) {
                     image = new ImageView(
-                        (new Image("file:resources/clydeUp",30,30,true,true)));
+                        (new Image("file:resources/clydeUp",30,30,true,true))); //ghost
                 } else if (board.getGhosts()[3] != null && board.getGhosts()[3].getRow() == rowcount
                            && board.getGhosts()[3].getColumn() == colcount) {
                     image = new ImageView(
-                        (new Image("file:resources/pinkyLeft",30,30,true,true)));
+                        (new Image("file:resources/pinkyLeft",30,30,true,true))); //ghost
                 }
 
-            } else if (tileView == 'G' && board.getCherryTurns() > 0) {
+            } else if (tileView == 'G' && board.getCherryRounds() > 0) {
                 image = new ImageView((new Image("file:resources/blueGhost", 40,40,true,true)));
             } else if (tileView == 'C') {
                 image = new ImageView((new Image("file:resources/cherry", 40,40,true,true)));
             } else if (tileView == 'D') {
                 image = new ImageView((new Image("file:resources/pacmanOver",
-                40,40,true,true)));
+                40,40,true,true))); //gameover user lost
             }
         } //Tile(char)
 
@@ -313,7 +317,7 @@ public class OmegaApp extends Application {
                 image.setImage(new Image("file:resources/smallDot", 40,40,true,true));
             } else if (tileView == 'P') {
                 image.setImage(new Image("file:resources/pacman", 40,40,true,true));
-            } else if (tileView == 'G' && board.getCherryTurns() == 0) {
+            } else if (tileView == 'G' && board.getCherryRounds() == 0) {
                 if (board.getGhosts()[0] != null && board.getGhosts()[0].getRow() == rowcount &&
                     board.getGhosts()[0].getColumn() == colcount) {
                     image.setImage(new Image("file:resources/blinkyLeft", 40,40,true,true));
@@ -330,7 +334,7 @@ public class OmegaApp extends Application {
                     image.setImage(
                         new Image("file:resources/pinkyLeft", 40,40,true,true));
                 }
-            } else if (tileView == 'G' && board.getCherryTurns() > 0) {
+            } else if (tileView == 'G' && board.getCherryRounds() > 0) {
                 image.setImage(
                     new Image("file:resources/blueGhost", 40,40,true,true));
             } else if (tileView == 'C') {
@@ -341,8 +345,8 @@ public class OmegaApp extends Application {
             if (board.isGameOver() && tileView == ' ') {
                 image.setImage(new Image("file:resources/bigDot", 40,40,true,true));
             }
-            if (board.isGameOver() && tileView == 'D') {
-                board.pacman.setView('P');
+            if (board.isGameOver() && tileView == 'D') { //'D'for where pacman dies
+                board.pacman.setView('P'); //reset pacman char
             }
 
         } //updateImages
@@ -363,8 +367,8 @@ public class OmegaApp extends Application {
      * @param args
      */
     private void commandLine(String[] args) {
-        String inputBoard = null; // input
-        int boardSize = 0; // size of input board
+        int boardSize = 0; //size of input board
+        String inputBoard = null; //takes in possible user input
 
         if ((args.length % 2) != 0) {
             printError();
@@ -372,15 +376,15 @@ public class OmegaApp extends Application {
         }
 
         for (int i = 0; i < args.length; i += 2) {
-            if (args[i].equals("-i")) {
+            if (args[i].equals("-o")) {
                 inputBoard = args[i + 1];
-            } else if (args[i].equals("-o")) {
+            } else if (args[i].equals("-i")) {
                 outputBoard = args[i + 1];
             } else if (args[i].equals("-s")) {
                 boardSize = Integer.parseInt(args[i + 1]);
             } else {
                 printError();
-                System.exit(-1);
+                System.exit(1);
             }
         }
 
@@ -390,6 +394,7 @@ public class OmegaApp extends Application {
         }
         if (boardSize < 3) {
             boardSize = 10;
+            //default will be 10
         }
         try {
             if (inputBoard != null) {

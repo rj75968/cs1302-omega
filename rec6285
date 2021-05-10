@@ -1,0 +1,174 @@
+cs1302-omega:
+total 80
+-rw-r--r--. 1 myid  9989 Apr 29 11:38 APPENDIX_API.rst
+-rw-r--r--. 1 myid  3049 Apr 29 11:38 APPENDIX_GAME.rst
+-rw-r--r--. 1 myid  4205 Apr 29 11:38 APPENDIX_GIT.rst
+-rwxr-xr-x. 1 myid   197 Apr 29 11:38 compile.sh
+drwxr-xr-x. 2 myid    47 May  9 23:00 meta
+-rw-r--r--. 1 myid   116 May  8 14:36 Pac-Man.board
+-rw-r--r--. 1 myid  7299 May  4 23:37 pom.xml
+-rwxr-xr-x. 1 myid   105 Apr 29 11:38 prepare-merge.sh
+-rw-r--r--. 1 myid 28287 Apr 29 11:38 README.rst
+-rw-r--r--. 1 myid     0 May  9 23:53 rec6285
+drwxr-xr-x. 3 myid  4096 May  9 22:59 resources
+-rwxr-xr-x. 1 myid   271 Apr 29 11:38 site.sh
+drwxr-xr-x. 4 myid    42 Apr 29 11:38 src
+drwxr-xr-x. 5 myid    82 May  9 23:50 target
+
+cs1302-omega/meta:
+total 8
+-rw-r--r--. 1 myid 1901 May  9 23:00 ATTRIBUTION.md
+-rw-r--r--. 1 myid 1474 May  9 19:25 DEADLINE.md
+
+cs1302-omega/resources:
+total 2564
+-rw-r--r--. 1 myid    2242 May  5 20:54 bigDot
+-rw-r--r--. 1 myid    8473 May  9 13:40 blinkyLeft
+-rw-r--r--. 1 myid   72536 May  9 11:36 blueGhost
+-rw-r--r--. 1 myid  145400 Oct 10  2017 cherry
+-rw-r--r--. 1 myid    8377 May  9 13:01 clydeUp
+-rw-r--r--. 1 myid      41 Apr 29 11:38 config.properties
+-rw-r--r--. 1 myid    7977 May  9 13:34 inkyUp
+-rw-r--r--. 1 myid   65769 May  9 18:42 pacman
+-rw-r--r--. 1 myid   54668 Oct 10  2017 pacmanOver
+-rw-r--r--. 1 myid   99238 May 23  2017 pinkyLeft
+-rw-r--r--. 1 myid  582183 Apr 29 11:38 readme-banner.png
+-rw-r--r--. 1 myid 1540930 Apr 29 11:38 readme-newrepo.png
+-rw-r--r--. 1 myid    1107 May  5 20:54 smallDot
+drwxr-xr-x. 2 myid      34 Apr 29 11:38 sprites
+
+cs1302-omega/resources/sprites:
+total 4
+-rw-r--r--. 1 myid 781 Apr 29 11:38 cat_idle.gif
+
+cs1302-omega/src:
+total 0
+drwxr-xr-x. 3 myid 26 Apr 29 11:38 main
+drwxr-xr-x. 3 myid 50 Apr 29 11:38 site
+
+cs1302-omega/src/main:
+total 0
+drwxr-xr-x. 3 myid 56 May  9 14:31 java
+
+cs1302-omega/src/main/java:
+total 4
+drwxr-xr-x. 5 myid  58 Apr 29 11:38 cs1302
+-rw-r--r--. 1 myid 313 May  9 14:31 module-info.java
+
+cs1302-omega/src/main/java/cs1302:
+total 0
+drwxr-xr-x. 2 myid 103 Apr 29 11:38 api
+drwxr-xr-x. 2 myid  80 Apr 29 11:38 game
+drwxr-xr-x. 2 myid 141 May  9 23:50 omega
+
+cs1302-omega/src/main/java/cs1302/api:
+total 16
+-rw-r--r--. 1 myid 3287 Apr 29 11:38 OpenLibrarySearchApi.java
+-rw-r--r--. 1 myid 1670 Apr 29 11:38 PropertiesExample.java
+-rw-r--r--. 1 myid 4234 Apr 29 11:38 Tools.java
+
+cs1302-omega/src/main/java/cs1302/game:
+total 16
+-rw-r--r--. 1 myid 3152 Apr 29 11:38 DemoGame.java
+-rw-r--r--. 1 myid 5248 Apr 29 11:38 Game.java
+-rw-r--r--. 1 myid 1405 Apr 29 11:38 IdleCat.java
+
+cs1302-omega/src/main/java/cs1302/omega:
+total 44
+-rw-r--r--. 1 myid  1533 May  9 22:14 Character.java
+-rw-r--r--. 1 myid   911 May  9 22:21 Direction.java
+-rw-r--r--. 1 myid 13878 May  9 23:50 GameBoard.java
+-rw-r--r--. 1 myid 15989 May  9 23:32 OmegaApp.java
+-rw-r--r--. 1 myid  1295 May  8 12:51 OmegaDriver.java
+
+cs1302-omega/src/site:
+total 4
+drwxr-xr-x. 2 myid  33 Apr 29 11:38 markdown
+-rw-r--r--. 1 myid 424 Apr 29 11:38 site.xml
+
+cs1302-omega/src/site/markdown:
+total 4
+-rw-r--r--. 1 myid 133 Apr 29 11:38 index.md.vm
+
+cs1302-omega/target:
+total 4
+drwxr-xr-x. 4 myid 4096 May  9 23:50 classes
+drwxr-xr-x. 3 myid   25 May  9 23:50 generated-sources
+drwxr-xr-x. 3 myid   43 May  9 23:50 maven-status
+
+cs1302-omega/target/classes:
+total 2568
+-rw-r--r--. 1 myid    2242 May  9 23:50 bigDot
+-rw-r--r--. 1 myid    8473 May  9 23:50 blinkyLeft
+-rw-r--r--. 1 myid   72536 May  9 23:50 blueGhost
+-rw-r--r--. 1 myid  145400 May  9 23:50 cherry
+-rw-r--r--. 1 myid    8377 May  9 23:50 clydeUp
+-rw-r--r--. 1 myid      41 May  9 23:50 config.properties
+drwxr-xr-x. 5 myid      58 May  9 23:50 cs1302
+-rw-r--r--. 1 myid    7977 May  9 23:50 inkyUp
+-rw-r--r--. 1 myid     331 May  9 23:50 module-info.class
+-rw-r--r--. 1 myid   65769 May  9 23:50 pacman
+-rw-r--r--. 1 myid   54668 May  9 23:50 pacmanOver
+-rw-r--r--. 1 myid   99238 May  9 23:50 pinkyLeft
+-rw-r--r--. 1 myid  582183 May  9 23:50 readme-banner.png
+-rw-r--r--. 1 myid 1540930 May  9 23:50 readme-newrepo.png
+-rw-r--r--. 1 myid    1107 May  9 23:50 smallDot
+drwxr-xr-x. 2 myid      34 May  9 23:50 sprites
+
+cs1302-omega/target/classes/cs1302:
+total 0
+drwxr-xr-x. 2 myid 106 May  9 23:50 api
+drwxr-xr-x. 2 myid  83 May  9 23:50 game
+drwxr-xr-x. 2 myid 238 May  9 23:50 omega
+
+cs1302-omega/target/classes/cs1302/api:
+total 12
+-rw-r--r--. 1 myid 3793 May  9 23:50 OpenLibrarySearchApi.class
+-rw-r--r--. 1 myid 1680 May  9 23:50 PropertiesExample.class
+-rw-r--r--. 1 myid 2279 May  9 23:50 Tools.class
+
+cs1302-omega/target/classes/cs1302/game:
+total 16
+-rw-r--r--. 1 myid 3096 May  9 23:50 DemoGame.class
+-rw-r--r--. 1 myid 4560 May  9 23:50 Game.class
+-rw-r--r--. 1 myid 1258 May  9 23:50 IdleCat.class
+
+cs1302-omega/target/classes/cs1302/omega:
+total 44
+-rw-r--r--. 1 myid 1048 May  9 23:50 Character.class
+-rw-r--r--. 1 myid 1939 May  9 23:50 Direction.class
+-rw-r--r--. 1 myid 6021 May  9 23:50 GameBoard.class
+-rw-r--r--. 1 myid 1294 May  9 23:50 OmegaApp$1.class
+-rw-r--r--. 1 myid 7581 May  9 23:50 OmegaApp.class
+-rw-r--r--. 1 myid 5010 May  9 23:50 OmegaApp$Helper.class
+-rw-r--r--. 1 myid 3127 May  9 23:50 OmegaApp$Tile.class
+-rw-r--r--. 1 myid 1517 May  9 23:50 OmegaDriver.class
+
+cs1302-omega/target/classes/sprites:
+total 4
+-rw-r--r--. 1 myid 781 May  9 23:50 cat_idle.gif
+
+cs1302-omega/target/generated-sources:
+total 0
+drwxr-xr-x. 2 myid 6 May  9 23:50 annotations
+
+cs1302-omega/target/generated-sources/annotations:
+total 0
+
+cs1302-omega/target/maven-status:
+total 0
+drwxr-xr-x. 3 myid 29 May  9 23:50 maven-compiler-plugin
+
+cs1302-omega/target/maven-status/maven-compiler-plugin:
+total 0
+drwxr-xr-x. 3 myid 37 May  9 23:50 compile
+
+cs1302-omega/target/maven-status/maven-compiler-plugin/compile:
+total 0
+drwxr-xr-x. 2 myid 52 May  9 23:50 default-compile
+
+cs1302-omega/target/maven-status/maven-compiler-plugin/compile/default-compile:
+total 8
+-rw-r--r--. 1 myid 434 May  9 23:50 createdFiles.lst
+-rw-r--r--. 1 myid 876 May  9 23:50 inputFiles.lst
+/home/myid/rj75968/cs1302-omega:/home/myid/csci-1302

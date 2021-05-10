@@ -6,7 +6,7 @@ package cs1302.omega;
 public enum Direction {
 
     UP(0, -1), DOWN(0, 1), LEFT(-1, 0), RIGHT(1, 0), STAY(0, 0);
-    //the movements for each direction
+    //the movements on the board for each direction
 
     private final int x;
     private final int y;
@@ -43,6 +43,7 @@ public enum Direction {
      */
     public String toString() {
         return name() + "(" + x + ", " + y + ")";
+        //formats coordinates into a string
     } //toString
 
 } //Direction

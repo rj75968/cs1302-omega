@@ -55,12 +55,15 @@ public class GameBoard {
         visitCheck = new boolean[boardSize][boardSize];
 
         pacman = new Character(boardSize / 2, boardSize / 2, 'P');
+        //places pacman and assigns 'P' char
         ghosts = new Character[4];
-        ghosts[0] = new Character(          0,           0, 'G');
-        ghosts[1] = new Character(boardSize - 1,           0, 'G');
-        ghosts[2] = new Character(          0, boardSize - 1, 'G');
+        ghosts[0] = new Character(0, 0, 'G');
+        ghosts[1] = new Character(boardSize - 1, 0, 'G');
+        ghosts[2] = new Character(0, boardSize - 1, 'G');
         ghosts[3] = new Character(boardSize - 1, boardSize - 1, 'G');
+        //each ghost given variable spots on the  board and assigned 'G' char
         cherry = new Character(x, y, 'C');
+        //cherry placed randomly and assigned 'C' char
 
         setVisitCheck(boardSize / 2, boardSize / 2);
         update(); //updates game progress every time new GameBoard created
@@ -76,7 +79,7 @@ public class GameBoard {
      * @throws IOException
      */
     public GameBoard(String newBoard) throws IOException {
-
+        //takes in user input for board creation, not fully implemented
         Scanner input = new Scanner(new File(newBoard));
 
         boardSize = input.nextInt();
@@ -152,6 +155,7 @@ public class GameBoard {
     public void setVisitCheck (int x, int y) {
         if (x >= boardSize || y > boardSize || x < 0 || y < 0) {
             return;
+            //checks coordinates to mark off as visited
         }
         visitCheck[x][y] = true;
     } //setVisitCheck
@@ -160,9 +164,9 @@ public class GameBoard {
      * Getter method for {@code cherryRounds}.
      * @return cherryRounds
      */
-    public int getCherryTurns() {
+    public int getCherryRounds() {
         return cherryRounds;
-    }
+    } //getCherryRounds
 
     /**
      * Getter method for {@code ghosts}.
@@ -170,7 +174,7 @@ public class GameBoard {
      */
     public Character[] getGhosts() {
         return ghosts;
-    }
+    } //getGhosts
 
     /**
      * Getter method for {@code pacman}.
@@ -178,7 +182,7 @@ public class GameBoard {
      */
     public Character getPacMan() {
         return pacman;
-    }
+    } //getPacMan
 
     /**
      * Updates score and overall game progress.
@@ -254,7 +258,7 @@ public class GameBoard {
             }
         } //loop through each ghost and check for its move
         update(); //update game progress after character move
-    } //move
+    } //userMove
 
 
     /**
@@ -314,6 +318,7 @@ public class GameBoard {
 
 
         if (cherryRounds == 0) {
+            //if no cherry power, check these conditions for movement
             if (rowDiff > 0 && colDiff == 0 ) {
                 if (ghostRow - pacmanRow > 0) {
                     ghost.setPosition(ghostRow - 1, ghostCol);
@@ -356,7 +361,9 @@ public class GameBoard {
     } //ghostMove
 
     /**
-     * Method detailing the movement pattern of a {@link Character} ghost object.
+     * Similar to {@link ghostMove1}, detailing the movement pattern of a
+     * {@link Character} ghost object.
+     *
      * @param ghost the ghost object to set a pattern for
      * @return Direction the Direction constant that the ghost is taking
      */
