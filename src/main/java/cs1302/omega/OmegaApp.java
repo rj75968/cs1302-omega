@@ -181,15 +181,16 @@ public class OmegaApp extends Application {
 			for (int i = 0;i < board.BOARD_SIZE; i++) {
 				colcount = 0;
 				for (int j = 0; j < board.BOARD_SIZE; j++) {
-					tiles[i][j].updateImageView(board.getGrid()[i][j]);//Updates GUI to reflect grid[][]
+					tiles[i][j].updateImageView(board.getGrid()[i][j]);
 					colcount++;
 				}
 				rowcount++;
 			}
-			score.setText("Score: " + board.getScore());//Updates Score on GUI
-			cherryTurnsLeft.setText("Cherry Turns Left:" + board.getCherryTurns());
-			//Updates Turns of cherry left
-			gameOver();//Checks if game is over
+
+			cherryTurnsLeft.setText("Cherry Turns Left: " + board.getCherryTurns());
+            score.setText("Score: " + board.getScore());
+            //updates score and cherry count
+			gameOver();
 
 		} //Helper
 
@@ -386,8 +387,9 @@ public class OmegaApp extends Application {
 			}
 		}
 
-		if (outputBoard == null)
-			outputBoard = "Pac-Man.board";
+		if (outputBoard == null) {
+			outputBoard = "PacMan.outputBoard";
+        }
 		if(boardSize < 3)
 			boardSize = 10;
 
@@ -398,12 +400,7 @@ public class OmegaApp extends Application {
 				board = new GameBoard(boardSize);
             }
         } catch (Exception e) {
-			System.out.println(e.getClass().getName() + " was thrown while creating a " +
-					"Board from file " + inputBoard);
-			System.out.println("Either your Board(String, Random) " +
-					"Constructor is broken or the file isn't " +
-					"formated correctly");
-			System.exit(1);
+            System.exit(1);
 		}
 	}
 
