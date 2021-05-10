@@ -11,7 +11,6 @@ import java.util.Random;
  */
 public class GameBoard {
 
-
     char[][] grid;
     //char array of game board
     boolean[][] visitCheck;
@@ -28,9 +27,7 @@ public class GameBoard {
     // four colored enemies of pacman
     Character cherry;
     // cherry that gives pacman character ability to defeat ghosts
-
-
-    public final int BOARD_SIZE;
+    public final int boardSize;
     //grid size constant
 
     /**
@@ -40,30 +37,32 @@ public class GameBoard {
      */
     public GameBoard(int size) {
 
+        Random r = new Random();
 
-    	Random rand = new Random();
+        int x = r.nextInt(size);
+        int y = r.nextInt(size);
 
-    	int x = rand.nextInt(size);
-    	int y = rand.nextInt(size);
-    	while ((x == size/2 && y == size/2) || (x == 0 && y == 0) || (x == size-1 && y == size-1) || (x == 0 && y == size-1) || (x == size-1 && y == 0)) {
-    		x = rand.nextInt(size); //checks that cherry isn't on player or ghost
-    		y = rand.nextInt(size); //board dimension
-    	}
+        while ((x == size / 2 && y == size / 2) || (x == 0 && y == 0) ||
+               (x == size - 1 && y == size - 1) || (x == 0 && y == size - 1)
+               || (x == size - 1 && y == 0)) {
+            x = r.nextInt(size); //checks that cherry isn't on player or ghost
+            y = r.nextInt(size); //board dimension
+        }
 
-        BOARD_SIZE = size;
+        boardSize = size;
         score = 0;
-        grid = new char[BOARD_SIZE][BOARD_SIZE];
-        visitCheck = new boolean[BOARD_SIZE][BOARD_SIZE];
+        grid = new char[boardSize][boardSize];
+        visitCheck = new boolean[boardSize][boardSize];
 
-        pacman = new Character(BOARD_SIZE / 2, BOARD_SIZE / 2, 'P');
+        pacman = new Character(boardSize / 2, boardSize / 2, 'P');
         ghosts = new Character[4];
         ghosts[0] = new Character(          0,           0, 'G');
-        ghosts[1] = new Character(BOARD_SIZE-1,           0, 'G');
-        ghosts[2] = new Character(          0, BOARD_SIZE-1, 'G');
-        ghosts[3] = new Character(BOARD_SIZE-1, BOARD_SIZE-1, 'G');
+        ghosts[1] = new Character(boardSize - 1,           0, 'G');
+        ghosts[2] = new Character(          0, boardSize - 1, 'G');
+        ghosts[3] = new Character(boardSize - 1, boardSize - 1, 'G');
         cherry = new Character(x, y, 'C');
 
-        setVisitCheck(BOARD_SIZE / 2, BOARD_SIZE / 2);
+        setVisitCheck(boardSize / 2, boardSize / 2);
         update(); //updates game progress every time new GameBoard created
 
     } //GameBoard(int size)
@@ -80,18 +79,18 @@ public class GameBoard {
 
         Scanner input = new Scanner(new File(newBoard));
 
-        BOARD_SIZE = input.nextInt();
+        boardSize = input.nextInt();
         score = input.nextInt();
 
-        grid = new char[BOARD_SIZE][BOARD_SIZE];
-        visitCheck = new boolean[BOARD_SIZE][BOARD_SIZE];
+        grid = new char[boardSize][boardSize];
+        visitCheck = new boolean[boardSize][boardSize];
         String chars = input.nextLine();
 
         char ch;
         ghosts = new Character[4];
-        for (int rowIndex = 0; rowIndex < BOARD_SIZE; rowIndex++) {
+        for (int rowIndex = 0; rowIndex < boardSize; rowIndex++) {
             chars = input.nextLine();
-            for (int columnIndex = 0; columnIndex < BOARD_SIZE; columnIndex++) {
+            for (int columnIndex = 0; columnIndex < boardSize; columnIndex++) {
                 ch = chars.charAt(columnIndex);
                 grid[rowIndex][columnIndex] = ch;
 
@@ -103,7 +102,7 @@ public class GameBoard {
                 case 'G': //ghost object character
                     for (int i = 0; i < ghosts.length; i++) {
                         if (ghosts[i] == null) {
-                            ghosts[i] = new Character(rowIndex, columnIndex, 'G');;
+                            ghosts[i] = new Character(rowIndex, columnIndex, 'G');
                             break;
                         }
                     }
@@ -129,41 +128,64 @@ public class GameBoard {
 
     } //GameBoard(String input)
 
-
-    public int getScore() {
+    /**
+     * Getter method for {@code score}.
+     * @return score
+     */
+    public int getScore () {
         return score;
     } //getScore
 
-
-    public char[][] getGrid() {
+    /**
+     * Getter method for {@code grid}.
+     * @return grid
+     */
+    public char[][] getGrid () {
         return grid;
     } //getGrid
 
-    public void setVisitCheck(int x, int y) {
-        if (x >= BOARD_SIZE || y > BOARD_SIZE || x < 0 || y < 0) {
+    /**
+     * Setter method for {@code x} and {@code y}.
+     * @param x the coordinate of position
+     * @param y the coordinate of position
+     */
+    public void setVisitCheck (int x, int y) {
+        if (x >= boardSize || y > boardSize || x < 0 || y < 0) {
             return;
         }
         visitCheck[x][y] = true;
     } //setVisitCheck
 
+    /**
+     * Getter method for {@code cherryRounds}.
+     * @return cherryRounds
+     */
     public int getCherryTurns() {
-    	return cherryRounds;
+        return cherryRounds;
     }
 
+    /**
+     * Getter method for {@code ghosts}.
+     * @return ghosts
+     */
     public Character[] getGhosts() {
-    	return ghosts;
+        return ghosts;
     }
 
+    /**
+     * Getter method for {@code pacman}.
+     * @return pacman
+     */
     public Character getPacMan() {
-    	return pacman;
+        return pacman;
     }
 
-    /*
+    /**
      * Updates score and overall game progress.
      */
     public void update() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
                 if (!visitCheck[i][j]) {
                     grid[i][j] = '*';
                 } else {
@@ -172,32 +194,36 @@ public class GameBoard {
             }
         }
         if (ateCherry == false) {
-        	grid[cherry.getRow()][cherry.getColumn()] = cherry.getView();
+            grid[cherry.getRow()][cherry.getColumn()] = cherry.getView();
         }
         grid[pacman.getRow()][pacman.getColumn()] = pacman.getView();
 
         for (Character ghost : ghosts) {
-        	if (ghost != null) {
-	            if (cherryRounds == 0) {
-	            	if (pacman.getRow() == ghost.getRow() && pacman.getColumn() == ghost.getColumn()) {
-	            		grid[ghost.getRow()][ghost.getColumn()] = 'D'; //game over, pacman dead :(
-                    }   else grid[ghost.getRow()][ghost.getColumn()] = ghost.getView();
-	            } else if (cherryRounds > 0) {
-	            	if (pacman.getRow() == ghost.getRow() && pacman.getColumn() == ghost.getColumn()) {
-	            		grid[ghost.getRow()][ghost.getColumn()] = pacman.getView();
-	            		ghost = null; //set ghost to null when pacman on same spot and cherry rounds remaining
-	            	} else {
-	                	grid[ghost.getRow()][ghost.getColumn()] = ghost.getView();
-	                }
-	            }
-        	}
+            if (ghost != null) {
+                if (cherryRounds == 0) {
+                    if (pacman.getRow() == ghost.getRow()
+                        && pacman.getColumn() == ghost.getColumn()) {
+                        grid[ghost.getRow()][ghost.getColumn()] = 'D';
+                        //game over, pacman dead :(
+                    } else {
+                        grid[ghost.getRow()][ghost.getColumn()] = ghost.getView();
+                    }
+                } else if (cherryRounds > 0) {
+                    if (pacman.getRow() == ghost.getRow()
+                        && pacman.getColumn() == ghost.getColumn()) {
+                        grid[ghost.getRow()][ghost.getColumn()] = pacman.getView();
+                        ghost = null;
+                        //set ghost to null when pacman on same spot and cherry rounds remaining
+                    } else {
+                        grid[ghost.getRow()][ghost.getColumn()] = ghost.getView();
+                    }
+                }
+            }
         }
         if (cherryRounds > 0) {
-        	cherryRounds--; //if cherryRounds still more than 0, decrement
+            cherryRounds--; //if cherryRounds still more than 0, decrement
         }
     } //update
-
-
 
     /**
      * Method to add points to score based on user's keyboard input.
@@ -213,14 +239,18 @@ public class GameBoard {
             score += 10; //each dot eaten adds 10 points to score
             visitCheck[pacmanRow][pacmanCol] = true;
         }
-        if (ateCherry == false && pacman.getColumn() == cherry.getColumn() && pacman.getRow() == cherry.getRow()) {
-	        	score += 100; //cherries are 100 points
-	        	cherryRounds = 4;
-	        	ateCherry = true;
+
+        if (ateCherry == false && pacman.getColumn() == cherry.getColumn()
+            && pacman.getRow() == cherry.getRow()) {
+            score += 100; //cherries are 100 points
+            cherryRounds = 4;
+            ateCherry = true;
         }
+
         for (Character ghost : ghosts) {
             if (ghost != null) {
-                ghostMove(ghost);
+                ghostMove1(ghost);
+                ghostMove2(ghost);
             }
         } //loop through each ghost and check for its move
         update(); //update game progress after character move
@@ -232,34 +262,36 @@ public class GameBoard {
      * conditions.
      *
      * @param direction
-     * @return
+     * @return pacmanRow >= 0 && pacmanRow < boardSize && pacmanCol >= 0 && pacmanCol < boardSize
      */
     public boolean canMoveCheck(Direction direction) {
 
-    	if (direction == null && isGameOver()) {
-    		return false;
-    	} //if direction null and game is over, cannot move
+        if (direction == null && isGameOver()) {
+            return false;
+        } //if direction null and game is over, cannot move
 
-    	int pacmanRow = pacman.getRow() + direction.getY();
-    	int pacmanCol = pacman.getColumn() + direction.getX();
+        int pacmanRow = pacman.getRow() + direction.getY();
+        int pacmanCol = pacman.getColumn() + direction.getX();
 
-    	return pacmanRow >= 0 && pacmanRow < BOARD_SIZE && pacmanCol >= 0 && pacmanCol < BOARD_SIZE;
-    }
+        return pacmanRow >= 0 && pacmanRow < boardSize && pacmanCol >= 0 && pacmanCol < boardSize;
+    } //canMoveCheck
 
     /**
      * Boolean method checking if game is over.
      * Checks with zero cherry rounds and if ghosts remain.
+     *
+     * @return false if game is not over
      */
     public boolean isGameOver() {
         int pacmanRow = pacman.getRow();
         int pacmanCol = pacman.getColumn();
 
         for (Character ghost : ghosts) {
-        	if (cherryRounds == 0 && ghost != null) {
-        		if (ghost.getRow() == pacmanRow && ghost.getColumn() == pacmanCol) {
+            if (cherryRounds == 0 && ghost != null) {
+                if (ghost.getRow() == pacmanRow && ghost.getColumn() == pacmanCol) {
                     return true;
                 }
-        	}
+            }
         }
         return false;
     } //isGameOver
@@ -269,7 +301,8 @@ public class GameBoard {
      * @param ghost the ghost object to set a pattern for
      * @return Direction the Direction constant that the ghost is taking
      */
-    public Direction ghostMove(Character ghost) {
+    public Direction ghostMove1(Character ghost) {
+
         int pacmanRow = pacman.getRow();
         int pacmanCol = pacman.getColumn();
 
@@ -279,83 +312,98 @@ public class GameBoard {
         int rowDiff = Math.abs(ghostRow - pacmanRow);
         int colDiff = Math.abs(ghostCol - pacmanCol);
 
-        if (cherryRounds == 0) {
-	        if (rowDiff > 0 && colDiff == 0 ) {
-	            if (ghostRow - pacmanRow > 0) {
-	                ghost.setPosition(ghostRow - 1, ghostCol);
-	                return Direction.UP;
-	            } else {
-	                ghost.setPosition(ghostRow + 1, ghostCol);
-	                return Direction.DOWN;
-	            }
-	        } else if (rowDiff == 0 && colDiff > 0) {
-	            if (ghostCol - pacmanCol > 0) {
-	                ghost.setPosition(ghostRow, ghostCol - 1);
-	                return Direction.LEFT;
-	            } else {
-	                ghost.setPosition(ghostRow, ghostCol + 1);
-	                return Direction.RIGHT;
-	            }
-	        } else if (rowDiff == 0 && colDiff == 0) {
-	            return Direction.STAY;
-	        } else {
-	            if (rowDiff < colDiff) {
-	                if (ghostRow - pacmanRow > 0) {
-	                    ghost.setPosition(ghostRow - 1, ghostCol);
-	                    return Direction.UP;
-	                } else {
-	                    ghost.setPosition(ghostRow + 1, ghostCol);
-	                    return Direction.DOWN;
-	                }
-	            } else {
-	                if (ghostCol - pacmanCol > 0) {
-	                    ghost.setPosition(ghostRow, ghostCol - 1);
-	                    return Direction.LEFT;
-	                } else {
-	                    ghost.setPosition(ghostRow, ghostCol + 1);
-	                    return Direction.RIGHT;
-	                }
-	            }
-	        }
-        } else {
-        	if((ghostRow == BOARD_SIZE - 1 && ghostCol == BOARD_SIZE -1) ||
-               (ghostRow == 0 && ghostCol == 0) ||
-               (ghostRow == BOARD_SIZE - 1 && ghostCol == 0) ||
-               (ghostRow == 0 && ghostCol == BOARD_SIZE - 1)) {
-        		return Direction.STAY; //if its the corner of the board, don't move
-        	} else if (rowDiff >= colDiff) {
-        		if (ghostRow != BOARD_SIZE - 1 && ghostRow != 0) {
-        		 	if (ghostRow - pacmanRow >0) {
-        				return Direction.DOWN;
-        			} else {
-        				return Direction.UP;
-        			}
-        		} else if (ghostCol != 0 && ghostCol != BOARD_SIZE - 1) {
-        			if (ghostCol - pacmanCol > 0) {
-        				return Direction.RIGHT;
-        			} else {
-        				return Direction.LEFT;
-        			}
-        		}
-        	} else if (rowDiff < colDiff) {
-        		if (ghostCol != 0 && ghostCol != BOARD_SIZE - 1){
-        			if (ghostCol - pacmanCol > 0) {
-        				return Direction.RIGHT;
-        			} else {
-        				return Direction.LEFT;
-        			}
-        		} else if (ghostRow != BOARD_SIZE - 1 && ghostRow != 0) {
-        			if (ghostRow - pacmanRow > 0) {
-        				return Direction.DOWN;
-        			} else {
-        				return Direction.UP;
-        			}
-        		}
-        	}
-    		return Direction.STAY;
-        }
 
+        if (cherryRounds == 0) {
+            if (rowDiff > 0 && colDiff == 0 ) {
+                if (ghostRow - pacmanRow > 0) {
+                    ghost.setPosition(ghostRow - 1, ghostCol);
+                    return Direction.UP;
+                } else {
+                    ghost.setPosition(ghostRow + 1, ghostCol);
+                    return Direction.DOWN;
+                }
+            } else if (rowDiff == 0 && colDiff > 0) {
+                if (ghostCol - pacmanCol > 0) {
+                    ghost.setPosition(ghostRow, ghostCol - 1);
+                    return Direction.LEFT;
+                } else {
+                    ghost.setPosition(ghostRow, ghostCol + 1);
+                    return Direction.RIGHT;
+                }
+            } else if (rowDiff == 0 && colDiff == 0) {
+                return Direction.STAY;
+            } else {
+                if (rowDiff < colDiff) {
+                    if (ghostRow - pacmanRow > 0) {
+                        ghost.setPosition(ghostRow - 1, ghostCol);
+                        return Direction.UP;
+                    } else {
+                        ghost.setPosition(ghostRow + 1, ghostCol);
+                        return Direction.DOWN;
+                    }
+                } else {
+                    if (ghostCol - pacmanCol > 0) {
+                        ghost.setPosition(ghostRow, ghostCol - 1);
+                        return Direction.LEFT;
+                    } else {
+                        ghost.setPosition(ghostRow, ghostCol + 1);
+                        return Direction.RIGHT;
+                    }
+                }
+            }
+        }
+        return Direction.STAY;
     } //ghostMove
 
+    /**
+     * Method detailing the movement pattern of a {@link Character} ghost object.
+     * @param ghost the ghost object to set a pattern for
+     * @return Direction the Direction constant that the ghost is taking
+     */
+    public Direction ghostMove2(Character ghost) {
+        int pacmanRow = pacman.getRow();
+        int pacmanCol = pacman.getColumn();
 
+        int ghostRow = ghost.getRow();
+        int ghostCol = ghost.getColumn();
+
+        int rowDiff = Math.abs(ghostRow - pacmanRow);
+        int colDiff = Math.abs(ghostCol - pacmanCol);
+
+        if ((ghostRow == boardSize - 1 && ghostCol == boardSize - 1) ||
+            (ghostRow == 0 && ghostCol == 0) ||
+            (ghostRow == boardSize - 1 && ghostCol == 0) ||
+            (ghostRow == 0 && ghostCol == boardSize - 1)) {
+            return Direction.STAY; //if its the corner of the board, don't move
+        } else if (rowDiff >= colDiff) {
+            if (ghostRow != boardSize - 1 && ghostRow != 0) {
+                if (ghostRow - pacmanRow > 0) {
+                    return Direction.DOWN;
+                } else {
+                    return Direction.UP;
+                }
+            } else if (ghostCol != 0 && ghostCol != boardSize - 1) {
+                if (ghostCol - pacmanCol > 0) {
+                    return Direction.RIGHT;
+                } else {
+                    return Direction.LEFT;
+                }
+            }
+        } else if (rowDiff < colDiff) {
+            if (ghostCol != 0 && ghostCol != boardSize - 1) {
+                if (ghostCol - pacmanCol > 0) {
+                    return Direction.RIGHT;
+                } else {
+                    return Direction.LEFT;
+                }
+            } else if (ghostRow != boardSize - 1 && ghostRow != 0) {
+                if (ghostRow - pacmanRow > 0) {
+                    return Direction.DOWN;
+                } else {
+                    return Direction.UP;
+                }
+            }
+        }
+        return Direction.STAY;
+    } //ghostMove2
 } //GameBoard
